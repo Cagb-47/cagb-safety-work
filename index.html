@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CAGB Safety Work | Acervo Técnico Editável de SST para Técnicos em Segurança do Trabalho</title>
+  <meta name="description" content="Acervo técnico 100% editável para TSTs: PGR, GRO, Ordens de Serviço, treinamentos por NR, checklists de inspeção, planilhas de EPI e ASO e biblioteca de DDS. Experiência em SST desde 2007." />
+  <meta name="theme-color" content="#0A1D30" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 6 11.9 28v44L50 94Z' fill='%230F2942' stroke='%230F2942' stroke-width='6' stroke-linejoin='round'/%3E%3Cpath d='M50 6 88.1 28v44L50 94Z' fill='%231E6B52' stroke='%231E6B52' stroke-width='6' stroke-linejoin='round'/%3E%3Cpath d='M30 51 44 65 71 36' fill='none' stroke='%23fff' stroke-width='9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+  <!-- Tipografia -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:  { DEFAULT: '#0F2942', 700: '#16375A', 900: '#0A1D30' },
+            tech:  { DEFAULT: '#1E6B52', 50: '#EEF6F2', 700: '#17543F' },
+            action:{ DEFAULT: '#D97706', dark: '#B45309' },
+            ice:   '#F8FAFC',
+            line:  '#E2E8F0'
+          },
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons (CDN, versão fixada para os ícones não mudarem) -->
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    :root { --navy:#0F2942; --navy-900:#0A1D30; --tech:#1E6B52; --action:#D97706; --ice:#F8FAFC; --line:#E2E8F0; --ink:#334155; --muted:#64748B; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    body { font-family: Inter, system-ui, sans-serif; color: var(--ink); font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    h1, h2, h3 { font-family: "Plus Jakarta Sans", system-ui, sans-serif; color: var(--navy); letter-spacing: -0.025em; word-spacing: .06em; text-wrap: balance; }
+    p { text-wrap: pretty; }
+    :focus-visible { outline: 3px solid var(--action); outline-offset: 3px; border-radius: 4px; }
+    ::selection { background: var(--navy); color: #fff; }
+
+    .wrap { max-width: 76rem; margin-inline: auto; padding-inline: 1.25rem; }
+    @media (min-width: 640px) { .wrap { padding-inline: 2rem; } }
+    .section { padding-block: 5rem; }
+    @media (min-width: 1024px) { .section { padding-block: 7.5rem; } }
+    .section-title { font-size: clamp(1.875rem, 1.2rem + 2.4vw, 3rem); line-height: 1.08; font-weight: 800; }
+    .section-lead { margin-top: 1.25rem; font-size: 1.125rem; color: var(--muted); max-width: 38rem; }
+
+    /* Botões */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .625rem; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; border-radius: .5rem; transition: background-color .15s ease, color .15s ease, border-color .15s ease, transform .15s ease, box-shadow .15s ease; }
+    .btn-action { background: var(--action); color: var(--navy-900); box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 10px 24px -10px rgba(217,119,6,.7); }
+    .btn-action:hover { background: #E68A14; transform: translateY(-1px); }
+    .btn-action:active { transform: translateY(0); }
+    .btn-ghost { border: 1px solid var(--line); color: var(--navy); background: #fff; }
+    .btn-ghost:hover { border-color: var(--navy); }
+    .nav-cta { display: none; }
+    @media (min-width: 640px) { .nav-cta { display: inline-flex; } }
+
+    /* Cabeçalho */
+    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--line); }
+    .nav-link { font-size: .9375rem; font-weight: 500; color: #475569; padding-block: .5rem; border-bottom: 2px solid transparent; transition: color .15s ease, border-color .15s ease; }
+    .nav-link:hover { color: var(--navy); border-color: var(--tech); }
+
+    /* Hero */
+    .hero { position: relative; overflow: hidden; color: #fff; background:
+        radial-gradient(900px 520px at 82% 18%, rgba(30,107,82,.42), transparent 62%),
+        linear-gradient(180deg, #0A1D30 0%, #0F2942 100%); }
+    .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+        background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+        background-size: 40px 40px; -webkit-mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 72%); mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 72%); }
+    .hero h1 { color: #fff; font-weight: 800; font-size: clamp(2.25rem, 1.35rem + 3.4vw, 3.875rem); line-height: 1.06; letter-spacing: -0.03em; word-spacing: .06em; }
+    .hero-badge { display: inline-flex; align-items: center; gap: .5rem; padding: .4rem .85rem .4rem .6rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.07); font-size: .8125rem; font-weight: 600; color: #E2F2EA; }
+    .hero-badge i, .hero-badge svg { color: #7FD1AE; }
+
+    /* Pilha de documentos do hero */
+    .stack { position: relative; max-width: 30rem; margin-inline: auto; padding: 1.5rem .75rem 2rem; }
+    .sheet { background: #fff; color: var(--ink); border-radius: 3px; box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 30px 60px -22px rgba(0,0,0,.6), 0 12px 22px -14px rgba(0,0,0,.45); }
+    .sheet-back, .sheet-mid { position: absolute; inset: 1.5rem .75rem 2rem; }
+    .sheet-back { transform: rotate(5deg) translate(4%, -1%); background: var(--navy-900); border: 1px solid rgba(255,255,255,.14); }
+    .sheet-mid { transform: rotate(-4deg) translate(-3%, 1%); background: #F2F7F4; }
+    .sheet-front { position: relative; padding: 1.1rem 1.1rem 1.25rem; font-size: 10.5px; line-height: 1.35; }
+    @media (min-width: 640px) { .sheet-front { padding: 1.5rem 1.5rem 1.75rem; font-size: 11.5px; } }
+    .tblock { display: grid; grid-template-columns: 4.5rem 1fr 5.25rem; border: 1px solid var(--navy); }
+    .tblock > div { padding: .45rem .55rem; }
+    .tblock > div + div { border-left: 1px solid var(--navy); }
+    .tb-logo { display: grid; place-items: center; text-align: center; color: #94A3B8; background: repeating-linear-gradient(135deg, #F8FAFC 0 6px, #EEF2F6 6px 12px); font-weight: 600; }
+    .tb-title b { display: block; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; color: var(--navy); font-size: 1.2em; letter-spacing: -.01em; }
+    .tb-meta { color: var(--muted); display: grid; align-content: center; gap: .15rem; }
+    .tb-meta b { color: var(--navy); font-weight: 600; }
+    .doc-h { margin-top: 1rem; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; color: var(--navy); font-size: 1.05em; }
+    .inv { margin-top: .5rem; width: 100%; border-collapse: collapse; }
+    .inv th { text-align: left; font-weight: 600; color: #fff; background: var(--navy); padding: .3rem .45rem; }
+    .inv td { padding: .38rem .45rem; border-bottom: 1px solid var(--line); }
+    .bar { display: block; height: 5px; border-radius: 3px; background: #E2E8F0; }
+    .lvl { display: inline-block; padding: .08rem .45rem; border-radius: 3px; font-weight: 600; }
+    .lvl-1 { background: #E3F1EA; color: #17543F; } .lvl-2 { background: #E2E8F0; color: #334155; } .lvl-3 { background: var(--navy); color: #fff; }
+    .doc-foot { margin-top: 1rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: end; }
+    .matrix { display: grid; grid-template-columns: repeat(5, 1.05rem); grid-auto-rows: 1.05rem; gap: 2px; }
+    @media (min-width: 640px) { .matrix { grid-template-columns: repeat(5, 1.3rem); grid-auto-rows: 1.3rem; } }
+    .matrix i { border-radius: 2px; }
+    .m1 { background: #CFE6DA; } .m2 { background: #7FB79E; } .m3 { background: #1E6B52; } .m4 { background: #0F2942; }
+    .mx-cap { margin-top: .3rem; color: var(--muted); font-size: .92em; }
+    .chip { position: absolute; display: flex; align-items: center; gap: .6rem; padding: .7rem .9rem; border-radius: .75rem; background: #fff; color: var(--navy); font-size: .8125rem; font-weight: 600; line-height: 1.25; box-shadow: 0 24px 40px -18px rgba(0,0,0,.55); }
+    .chip small { display: block; font-weight: 500; color: var(--muted); font-size: .75rem; }
+    .chip-a { right: -.25rem; top: 0; } .chip-b { left: -.5rem; bottom: .25rem; }
+    @media (min-width: 1024px) { .chip-a { right: -2rem; } .chip-b { left: -2.5rem; } }
+    .ext { display: inline-grid; place-items: center; min-width: 2.9rem; padding: .2rem .4rem; border-radius: 4px; font-family: "Plus Jakarta Sans", sans-serif; font-size: .6875rem; font-weight: 700; letter-spacing: .02em; }
+    .ext-docx { background: #E8EFFB; color: #1E4FA3; } .ext-xlsx { background: #E3F1EA; color: #17543F; } .ext-pptx { background: #FBEBE3; color: #A8431A; }
+
+    /* Entrada única do hero */
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; } }
+    @keyframes settle-back { from { opacity: 0; transform: rotate(0) translate(0, 12%); } }
+    @keyframes settle-mid { from { opacity: 0; transform: rotate(0) translate(0, 12%); } }
+    .sheet-front { animation: rise .7s cubic-bezier(.2,.7,.2,1) both; }
+    .sheet-mid { animation: settle-mid .8s .12s cubic-bezier(.2,.7,.2,1) both; }
+    .sheet-back { animation: settle-back .8s .22s cubic-bezier(.2,.7,.2,1) both; }
+    .chip { animation: rise .6s .5s cubic-bezier(.2,.7,.2,1) both; }
+
+    /* Credenciais */
+    .creds { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
+    .creds li { display: flex; gap: .875rem; align-items: flex-start; padding: 1.5rem 1.25rem; border-top: 1px solid var(--line); }
+    .creds li:nth-child(even) { border-left: 1px solid var(--line); }
+    .creds i, .creds svg { color: var(--tech); width: 1.375rem; height: 1.375rem; flex: none; margin-top: .15rem; }
+    .creds b { display: block; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; color: var(--navy); line-height: 1.3; }
+    .creds span { font-size: .875rem; color: var(--muted); line-height: 1.45; display: block; margin-top: .2rem; }
+    @media (min-width: 1024px) {
+      .creds { grid-template-columns: repeat(4, 1fr); }
+      .creds li { padding: 2rem 1.75rem; border-top: 0; }
+      .creds li + li { border-left: 1px solid var(--line); }
+    }
+
+    /* Catálogo */
+    .tablist { display: flex; gap: .5rem; overflow-x: auto; padding-bottom: .5rem; margin-inline: -1.25rem; padding-inline: 1.25rem; scrollbar-width: none; }
+    .tablist::-webkit-scrollbar { display: none; }
+    .tab-btn { flex: none; display: flex; align-items: center; gap: .875rem; text-align: left; padding: .85rem 1.1rem; border-radius: .625rem; border: 1px solid var(--line); background: #fff; color: #475569; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 600; font-size: .9375rem; white-space: nowrap; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+    .tab-btn:hover { border-color: #94A3B8; color: var(--navy); }
+    .tab-num { font-size: .8125rem; font-weight: 700; color: #94A3B8; font-variant-numeric: tabular-nums; }
+    .tab-btn[aria-selected="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .tab-btn[aria-selected="true"] .tab-num { color: #7FD1AE; }
+    @media (min-width: 1024px) {
+      .tablist { flex-direction: column; overflow: visible; margin: 0; padding: 0; gap: 0; border-left: 1px solid var(--line); }
+      .tab-btn { white-space: normal; border: 0; border-radius: 0; background: transparent; padding: 1.1rem 1.5rem; margin-left: -1px; border-left: 3px solid transparent; font-size: 1.0625rem; }
+      .tab-btn:hover { background: var(--ice); }
+      .tab-btn[aria-selected="true"] { background: transparent; color: var(--navy); border-left-color: var(--tech); }
+      .tab-btn[aria-selected="true"] .tab-num { color: var(--tech); }
+    }
+    .explorer { border: 1px solid var(--line); border-radius: .875rem; background: #fff; overflow: hidden; box-shadow: 0 1px 2px rgba(15,41,66,.04), 0 28px 50px -30px rgba(15,41,66,.3); }
+    .explorer-bar { display: flex; align-items: center; gap: .6rem; padding: .7rem 1.1rem; background: var(--navy); color: rgba(255,255,255,.82); font-size: .8125rem; font-weight: 500; }
+    .explorer-bar span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-head, .file-row { display: grid; grid-template-columns: 3.4rem 1fr auto; gap: .9rem; align-items: center; }
+    .file-head { margin-top: 1.75rem; padding-bottom: .6rem; border-bottom: 1px solid var(--navy); font-size: .75rem; font-weight: 600; color: var(--muted); }
+    .file-head span:last-child, .file-nr { text-align: right; }
+    .file-row { padding-block: .8rem; border-bottom: 1px solid var(--line); }
+    .file-row:last-child { border-bottom: 0; }
+    .file-name { font-weight: 500; color: var(--navy); line-height: 1.35; }
+    .file-nr { font-size: .8125rem; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+    /* Comparativo */
+    .cmp { width: 100%; min-width: 660px; border-collapse: separate; border-spacing: 0; font-size: .9375rem; text-align: left; }
+    .cmp thead th { padding: 1.1rem 1.4rem; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; color: var(--muted); vertical-align: bottom; }
+    .cmp thead th.cmp-brand { background: var(--navy); color: #fff; border-radius: .75rem .75rem 0 0; font-size: 1.0625rem; }
+    .cmp tbody th { padding: 1.1rem 1.4rem 1.1rem 0; font-weight: 600; color: var(--navy); border-top: 1px solid var(--line); width: 24%; }
+    .cmp tbody td { padding: 1.1rem 1.4rem; border-top: 1px solid var(--line); width: 38%; }
+    .cmp td span { display: flex; gap: .65rem; align-items: flex-start; }
+    .cmp td i, .cmp td svg { width: 1.1rem; height: 1.1rem; flex: none; margin-top: .22rem; }
+    .cmp-no { color: var(--muted); } .cmp-no i, .cmp-no svg { color: #94A3B8; }
+    .cmp-yes { background: #fff; color: var(--navy); font-weight: 500; border-inline: 1px solid var(--line); box-shadow: 0 0 0 0 transparent; }
+    .cmp-yes i, .cmp-yes svg { color: var(--tech); }
+    .cmp tbody tr:last-child .cmp-yes { border-bottom: 1px solid var(--line); border-radius: 0 0 .75rem .75rem; }
+
+    /* Fundador */
+    .cv { margin-top: 2.5rem; border-top: 1px solid var(--navy); }
+    .cv > div { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1.25rem; padding-block: 1.4rem; border-bottom: 1px solid var(--line); }
+    .cv dt { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; font-size: 1.375rem; color: var(--tech); letter-spacing: -.02em; line-height: 1.2; }
+    .cv dd b { display: block; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; color: var(--navy); font-size: 1.0625rem; }
+    .cv dd span { display: block; margin-top: .3rem; color: var(--muted); font-size: .9375rem; }
+
+    /* Como funciona */
+    .steps { counter-reset: step; display: grid; gap: 2.5rem; }
+    @media (min-width: 768px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 0; } }
+    .steps li { counter-increment: step; position: relative; padding-top: 3.25rem; }
+    .steps li::before { content: counter(step); position: absolute; top: 0; left: 0; width: 2.25rem; height: 2.25rem; display: grid; place-items: center; border-radius: 999px; background: var(--navy); color: #fff; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; font-size: .9375rem; }
+    @media (min-width: 768px) {
+      .steps li { padding-right: 2.5rem; }
+      .steps li::after { content: ""; position: absolute; top: 1.125rem; left: 3rem; right: .75rem; height: 1px; background: #CBD5E1; }
+      .steps li:last-child::after { display: none; }
+    }
+    .steps h3 { font-size: 1.25rem; font-weight: 700; }
+    .steps p { margin-top: .5rem; color: var(--muted); max-width: 20rem; }
+
+    /* Oferta */
+    .offer { background: radial-gradient(800px 400px at 12% 0%, rgba(30,107,82,.38), transparent 60%), var(--navy-900); color: #fff; }
+    .offer-card { background: #fff; color: var(--ink); border-radius: 1.25rem; overflow: hidden; display: grid; box-shadow: 0 40px 80px -40px rgba(0,0,0,.7); }
+    @media (min-width: 1024px) { .offer-card { grid-template-columns: 1.45fr 1fr; } }
+    .incl li { display: flex; gap: .875rem; align-items: flex-start; padding-block: .85rem; border-bottom: 1px solid var(--line); }
+    .incl li:last-child { border-bottom: 0; }
+    .incl i, .incl svg { width: 1.25rem; height: 1.25rem; color: var(--tech); flex: none; margin-top: .2rem; }
+    .incl b { color: var(--navy); font-weight: 600; }
+
+    /* FAQ */
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: 1.5rem; text-align: left; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; font-size: 1.0625rem; color: var(--navy); letter-spacing: -.01em; }
+    .faq-btn:hover { color: var(--tech); }
+    .faq-icon { position: relative; flex: none; width: 2rem; height: 2rem; border-radius: 999px; border: 1px solid var(--line); transition: background-color .2s ease, border-color .2s ease; }
+    .faq-icon::before, .faq-icon::after { content: ""; position: absolute; top: 50%; left: 50%; width: .75rem; height: 1.5px; background: var(--navy); transform: translate(-50%, -50%); transition: transform .25s ease, background-color .2s ease; }
+    .faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+    .faq-item[data-open="true"] .faq-icon { background: var(--navy); border-color: var(--navy); }
+    .faq-item[data-open="true"] .faq-icon::before, .faq-item[data-open="true"] .faq-icon::after { background: #fff; }
+    .faq-item[data-open="true"] .faq-icon::after { transform: translate(-50%, -50%) rotate(0deg); }
+    .faq-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .28s ease; }
+    .faq-panel > div { overflow: hidden; }
+    .faq-panel p { padding: 0 3.5rem 1.6rem 0; color: var(--muted); max-width: 42rem; }
+    .faq-item[data-open="true"] .faq-panel { grid-template-rows: 1fr; }
+
+    /* Botão flutuante */
+    .fab { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 40; display: flex; align-items: center; height: 3.5rem; padding-inline: 1rem; border-radius: 999px; background: var(--navy); color: #fff; border: 1px solid rgba(255,255,255,.16); box-shadow: 0 18px 36px -14px rgba(10,29,48,.7); transition: background-color .15s ease; }
+    .fab:hover { background: #16375A; }
+    .fab span { max-width: 0; overflow: hidden; white-space: nowrap; font-family: "Plus Jakarta Sans", sans-serif; font-size: .875rem; font-weight: 600; transition: max-width .25s ease, margin .25s ease; }
+    .fab:hover span, .fab:focus-visible span { max-width: 12rem; margin-left: .6rem; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-white">
+
+  <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-white focus:px-4 focus:py-2 focus:rounded focus:text-navy">Ir para o conteúdo</a>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="site-header">
+    <nav class="wrap h-[4.5rem] flex items-center justify-between gap-4" aria-label="Navegação principal">
+      <a href="#topo" class="flex items-center gap-3 shrink-0">
+        <!-- LOGO CAGB SAFETY WORK (símbolo) -->
+        <svg class="w-10 h-10 shrink-0" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 6 11.9 28v44L50 94Z" fill="#0F2942" stroke="#0F2942" stroke-width="6" stroke-linejoin="round"/><path d="M50 6 88.1 28v44L50 94Z" fill="#1E6B52" stroke="#1E6B52" stroke-width="6" stroke-linejoin="round"/><path d="M30 51 44 65 71 36" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="leading-none">
+          <span class="block font-display font-extrabold tracking-wide text-navy text-base">CAGB SAFETY WORK</span>
+          <span class="block text-[11px] text-slate-500 mt-1.5">Segurança Ocupacional</span>
+        </span>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-9">
+        <a href="#acervo" class="nav-link">O Acervo</a>
+        <a href="#diferenciais" class="nav-link">Diferenciais</a>
+        <a href="#fundador" class="nav-link">Sobre o Fundador</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- INSERIR LINK DO ROBÔ DE VENDAS AQUI (ou altere apenas WHATSAPP_NUMERO no final do arquivo) -->
+        <a href="#oferta" data-robo class="btn btn-ghost nav-cta px-4 py-2.5 text-sm">
+          <i data-lucide="message-square-text" class="w-4 h-4" aria-hidden="true"></i>
+          Falar com Consultor Virtual
+        </a>
+        <button id="menu-btn" type="button" class="lg:hidden grid place-items-center w-11 h-11 rounded-lg border border-line text-navy" aria-controls="menu-mobile" aria-expanded="false" aria-label="Abrir menu">
+          <i data-lucide="menu" class="w-5 h-5" data-icon-open aria-hidden="true"></i>
+          <i data-lucide="x" class="w-5 h-5 hidden" data-icon-close aria-hidden="true"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Menu mobile -->
+    <div id="menu-mobile" class="hidden lg:hidden border-t border-line bg-white">
+      <div class="wrap py-4 flex flex-col font-display font-semibold text-navy text-lg">
+        <a href="#acervo" class="py-3.5 border-b border-line">O Acervo</a>
+        <a href="#diferenciais" class="py-3.5 border-b border-line">Diferenciais</a>
+        <a href="#fundador" class="py-3.5 border-b border-line">Sobre o Fundador</a>
+        <a href="#faq" class="py-3.5">FAQ</a>
+        <!-- INSERIR LINK DO ROBÔ DE VENDAS AQUI -->
+        <a href="#oferta" data-robo class="btn btn-action mt-4 px-4 py-3.5 text-base">
+          <i data-lucide="message-square-text" class="w-5 h-5" aria-hidden="true"></i>
+          Falar com Consultor Virtual
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- ============================================================
+         HERO
+    ============================================================= -->
+    <section id="topo" class="hero">
+      <div class="wrap relative grid lg:grid-cols-[1.08fr_1fr] gap-14 lg:gap-10 items-center pt-14 pb-20 lg:pt-20 lg:pb-24">
+
+        <!-- Coluna esquerda -->
+        <div>
+          <span class="hero-badge">
+            <i data-lucide="shield-check" class="w-4 h-4" aria-hidden="true"></i>
+            Conformidade com as NRs Vigentes
+          </span>
+
+          <h1 class="mt-7">Menos horas montando documento. Mais tempo em campo, onde o risco está.</h1>
+
+          <p class="mt-7 text-lg sm:text-xl text-slate-300 max-w-[34rem]">
+            Um acervo técnico completo e 100% editável para Técnicos em Segurança do Trabalho, sempre atualizado conforme as NRs e estruturado por quem atua em SST desde 2007.
+          </p>
+
+          <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+            <!-- INSERIR LINK DO ROBÔ DE VENDAS AQUI -->
+            <a href="#oferta" data-robo class="btn btn-action px-7 py-4 text-base sm:text-lg">
+              Solicitar Acesso ao Acervo
+              <i data-lucide="arrow-right" class="w-5 h-5" aria-hidden="true"></i>
+            </a>
+            <a href="#acervo" class="inline-flex items-center justify-center gap-2 py-2 text-white font-semibold underline decoration-white/30 underline-offset-8 hover:decoration-white">
+              Ver o que está incluso
+            </a>
+          </div>
+
+          <p class="mt-8 text-sm text-slate-400">De especialista para especialista. Garantia legal de 7 dias.</p>
+        </div>
+
+        <!-- Coluna direita: pilha de documentos do acervo -->
+        <div class="stack" aria-hidden="true">
+          <div class="sheet sheet-back"></div>
+          <div class="sheet sheet-mid"></div>
+
+          <div class="sheet sheet-front">
+            <!-- Cabeçalho de documento técnico -->
+            <div class="tblock">
+              <div class="tb-logo">Sua logo aqui</div>
+              <div class="tb-title"><b>Programa de Gerenciamento de Riscos</b>PGR, conforme a NR-01</div>
+              <div class="tb-meta"><span>Revisão <b>00</b></span><span>Data <b>__/__/____</b></span></div>
+            </div>
+
+            <p class="doc-h">Inventário de riscos ocupacionais</p>
+            <table class="inv">
+              <thead><tr><th>Perigo</th><th>Fonte geradora</th><th>Nível de risco</th></tr></thead>
+              <tbody>
+                <tr><td><span class="bar" style="width:82%"></span></td><td><span class="bar" style="width:68%"></span></td><td><span class="lvl lvl-3">Alto</span></td></tr>
+                <tr><td><span class="bar" style="width:64%"></span></td><td><span class="bar" style="width:86%"></span></td><td><span class="lvl lvl-2">Médio</span></td></tr>
+                <tr><td><span class="bar" style="width:74%"></span></td><td><span class="bar" style="width:55%"></span></td><td><span class="lvl lvl-1">Baixo</span></td></tr>
+                <tr><td><span class="bar" style="width:58%"></span></td><td><span class="bar" style="width:72%"></span></td><td><span class="lvl lvl-2">Médio</span></td></tr>
+              </tbody>
+            </table>
+
+            <div class="doc-foot">
+              <div>
+                <p class="doc-h" style="margin-top:0">Plano de ação</p>
+                <div style="margin-top:.55rem; display:grid; gap:.45rem">
+                  <span class="bar" style="width:94%"></span><span class="bar" style="width:80%"></span><span class="bar" style="width:88%"></span><span class="bar" style="width:62%"></span>
+                </div>
+              </div>
+              <div>
+                <div class="matrix"><i class="m2"></i><i class="m3"></i><i class="m3"></i><i class="m4"></i><i class="m4"></i><i class="m2"></i><i class="m2"></i><i class="m3"></i><i class="m3"></i><i class="m4"></i><i class="m1"></i><i class="m2"></i><i class="m2"></i><i class="m3"></i><i class="m3"></i><i class="m1"></i><i class="m1"></i><i class="m2"></i><i class="m2"></i><i class="m3"></i><i class="m1"></i><i class="m1"></i><i class="m1"></i><i class="m2"></i><i class="m2"></i></div>
+                <p class="mx-cap">Probabilidade × severidade</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="chip chip-a">
+            <i data-lucide="refresh-cw" class="w-5 h-5 text-tech"></i>
+            <div>Sempre atualizado<small>a cada mudança das NRs</small></div>
+          </div>
+          <div class="chip chip-b">
+            <span class="flex gap-1"><span class="ext ext-docx">docx</span><span class="ext ext-xlsx">xlsx</span><span class="ext ext-pptx">pptx</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BARRA DE CREDENCIAIS
+    ============================================================= -->
+    <section aria-label="Credenciais">
+      <ul class="creds wrap !px-0">
+        <li><i data-lucide="hard-hat" aria-hidden="true"></i><div><b>Experiência em SST desde 2007</b><span>Chão de fábrica, auditorias e gestão de riscos.</span></div></li>
+        <li><i data-lucide="file-pen-line" aria-hidden="true"></i><div><b>100% Editável</b><span>Arquivos abertos em Word, Excel e PPT.</span></div></li>
+        <li><i data-lucide="scale" aria-hidden="true"></i><div><b>Documentos Sempre Atualizados</b><span>Revisados conforme as NRs em vigor.</span></div></li>
+        <li><i data-lucide="zap" aria-hidden="true"></i><div><b>Entrega Imediata</b><span>Acesso liberado após a confirmação.</span></div></li>
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         CATÁLOGO TÉCNICO (ABAS)
+         Ajuste a lista de arquivos de cada módulo conforme o conteúdo real do pacote.
+    ============================================================= -->
+    <section id="acervo" class="section">
+      <div class="wrap">
+        <h2 class="section-title max-w-3xl">Cinco módulos que cobrem a rotina documental do TST</h2>
+        <p class="section-lead">Pastas numeradas, nomenclatura padronizada e arquivos abertos para você adaptar à realidade de cada empresa atendida.</p>
+
+        <div class="mt-12 lg:mt-16 grid lg:grid-cols-[19rem_1fr] gap-8 lg:gap-14 items-start">
+          <!-- Abas -->
+          <div role="tablist" aria-label="Módulos do acervo" class="tablist min-w-0">
+              <button role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true" class="tab-btn">
+                <span class="tab-num">01</span><span>Documentação Base</span>
+              </button>
+              <button role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1" class="tab-btn">
+                <span class="tab-num">02</span><span>Treinamentos em PPT</span>
+              </button>
+              <button role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1" class="tab-btn">
+                <span class="tab-num">03</span><span>Inspeção e Auditoria</span>
+              </button>
+              <button role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false" tabindex="-1" class="tab-btn">
+                <span class="tab-num">04</span><span>Gestão e Indicadores</span>
+              </button>
+              <button role="tab" id="tab-5" aria-controls="panel-5" aria-selected="false" tabindex="-1" class="tab-btn">
+                <span class="tab-num">05</span><span>Rotina Diária</span>
+              </button>
+          </div>
+
+          <!-- Painéis -->
+          <div class="min-w-0">
+            <!-- Módulo 01 -->
+            <div role="tabpanel" id="panel-1" aria-labelledby="tab-1" tabindex="0" class="explorer">
+              <div class="explorer-bar">
+                <i data-lucide="folder-open" class="w-4 h-4" aria-hidden="true"></i>
+                <span>Acervo CAGB Safety Work / 01 Documentação Base</span>
+              </div>
+              <div class="p-6 sm:p-8">
+                <h3 class="text-xl sm:text-2xl font-bold">Módulo 01: Documentação Base</h3>
+                <p class="mt-2 text-slate-600 max-w-xl">A estrutura documental do Gerenciamento de Riscos Ocupacionais, pronta para receber os dados de cada empresa.</p>
+                <div class="file-head" aria-hidden="true"><span>Formato</span><span>Arquivo</span><span>Norma</span></div>
+                <ul>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Modelo de PGR com Inventário de Riscos</span><span class="file-nr">NR-01</span></li>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Plano de Ação do GRO</span><span class="file-nr">NR-01</span></li>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Ordens de Serviço por função</span><span class="file-nr">NR-01</span></li>
+                  <li class="file-row"><span class="ext ext-xlsx">xlsx</span><span class="file-name">Matriz de probabilidade e severidade</span><span class="file-nr">NR-01</span></li>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Fichas de entrega de EPI</span><span class="file-nr">NR-06</span></li>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Termos, comunicados e atas</span><span class="file-nr">Geral</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Módulo 02 -->
+            <div role="tabpanel" id="panel-2" aria-labelledby="tab-2" tabindex="0" hidden class="explorer">
+              <div class="explorer-bar">
+                <i data-lucide="folder-open" class="w-4 h-4" aria-hidden="true"></i>
+                <span>Acervo CAGB Safety Work / 02 Treinamentos em PPT</span>
+              </div>
+              <div class="p-6 sm:p-8">
+                <h3 class="text-xl sm:text-2xl font-bold">Módulo 02: Treinamentos em PPT</h3>
+                <p class="mt-2 text-slate-600 max-w-xl">Apresentações separadas por Norma Regulamentadora, em layout neutro para receber a identidade visual do seu cliente.</p>
+                <div class="file-head" aria-hidden="true"><span>Formato</span><span>Arquivo</span><span>Norma</span></div>
+                <ul>
+                  <li class="file-row"><span class="ext ext-pptx">pptx</span><span class="file-name">Trabalho em Altura</span><span class="file-nr">NR-35</span></li>
+                  <li class="file-row"><span class="ext ext-pptx">pptx</span><span class="file-name">Espaços Confinados</span><span class="file-nr">NR-33</span></li>
+                  <li class="file-row"><span class="ext ext-pptx">pptx</span><span class="file-name">Segurança em Eletricidade</span><span class="file-nr">NR-10</span></li>
+                  <li class="file-row"><span class="ext ext-pptx">pptx</span><span class="file-name">Máquinas e Equipamentos</span><span class="file-nr">NR-12</span></li>
+                  <li class="file-row"><span class="ext ext-pptx">pptx</span><span class="file-name">Uso e conservação de EPI</span><span class="file-nr">NR-06</span></li>
+                  <li class="file-row"><span class="ext ext-pptx">pptx</span><span class="file-name">CIPA e integração de novos colaboradores</span><span class="file-nr">NR-05</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Módulo 03 -->
+            <div role="tabpanel" id="panel-3" aria-labelledby="tab-3" tabindex="0" hidden class="explorer">
+              <div class="explorer-bar">
+                <i data-lucide="folder-open" class="w-4 h-4" aria-hidden="true"></i>
+                <span>Acervo CAGB Safety Work / 03 Inspeção e Auditoria</span>
+              </div>
+              <div class="p-6 sm:p-8">
+                <h3 class="text-xl sm:text-2xl font-bold">Módulo 03: Inspeção e Auditoria</h3>
+                <p class="mt-2 text-slate-600 max-w-xl">Checklists de campo com os itens de verificação referenciados à norma, para imprimir ou preencher no tablet.</p>
+                <div class="file-head" aria-hidden="true"><span>Formato</span><span>Arquivo</span><span>Norma</span></div>
+                <ul>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Inspeção geral de segurança por setor</span><span class="file-nr">Geral</span></li>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Extintores e sinalização</span><span class="file-nr">NR-23 e NR-26</span></li>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Máquinas e proteções</span><span class="file-nr">NR-12</span></li>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Empilhadeiras e movimentação de cargas</span><span class="file-nr">NR-11</span></li>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Permissão de Trabalho e APR</span><span class="file-nr">Geral</span></li>
+                  <li class="file-row"><span class="ext ext-xlsx">xlsx</span><span class="file-name">Relatório de não conformidades</span><span class="file-nr">Geral</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Módulo 04 -->
+            <div role="tabpanel" id="panel-4" aria-labelledby="tab-4" tabindex="0" hidden class="explorer">
+              <div class="explorer-bar">
+                <i data-lucide="folder-open" class="w-4 h-4" aria-hidden="true"></i>
+                <span>Acervo CAGB Safety Work / 04 Gestão e Indicadores</span>
+              </div>
+              <div class="p-6 sm:p-8">
+                <h3 class="text-xl sm:text-2xl font-bold">Módulo 04: Gestão e Indicadores</h3>
+                <p class="mt-2 text-slate-600 max-w-xl">Planilhas com fórmulas e alertas de vencimento para controlar prazos e apresentar resultados à gestão.</p>
+                <div class="file-head" aria-hidden="true"><span>Formato</span><span>Arquivo</span><span>Norma</span></div>
+                <ul>
+                  <li class="file-row"><span class="ext ext-xlsx">xlsx</span><span class="file-name">Controle de EPIs com CA e validade</span><span class="file-nr">NR-06</span></li>
+                  <li class="file-row"><span class="ext ext-xlsx">xlsx</span><span class="file-name">Controle de ASOs e exames periódicos</span><span class="file-nr">NR-07</span></li>
+                  <li class="file-row"><span class="ext ext-xlsx">xlsx</span><span class="file-name">Matriz de treinamentos e reciclagens</span><span class="file-nr">Geral</span></li>
+                  <li class="file-row"><span class="ext ext-xlsx">xlsx</span><span class="file-name">Indicadores de acidentes e frequência</span><span class="file-nr">Geral</span></li>
+                  <li class="file-row"><span class="ext ext-xlsx">xlsx</span><span class="file-name">Acompanhamento do Plano de Ação</span><span class="file-nr">NR-01</span></li>
+                  <li class="file-row"><span class="ext ext-xlsx">xlsx</span><span class="file-name">Painel resumo para a diretoria</span><span class="file-nr">Geral</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Módulo 05 -->
+            <div role="tabpanel" id="panel-5" aria-labelledby="tab-5" tabindex="0" hidden class="explorer">
+              <div class="explorer-bar">
+                <i data-lucide="folder-open" class="w-4 h-4" aria-hidden="true"></i>
+                <span>Acervo CAGB Safety Work / 05 Rotina Diária</span>
+              </div>
+              <div class="p-6 sm:p-8">
+                <h3 class="text-xl sm:text-2xl font-bold">Módulo 05: Rotina Diária</h3>
+                <p class="mt-2 text-slate-600 max-w-xl">O apoio do dia a dia: temas de DDS prontos e modelos de relatório para registrar o que foi feito.</p>
+                <div class="file-head" aria-hidden="true"><span>Formato</span><span>Arquivo</span><span>Norma</span></div>
+                <ul>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Biblioteca de temas de DDS</span><span class="file-nr">Geral</span></li>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Lista de presença padronizada</span><span class="file-nr">Geral</span></li>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Relatório diário de SST</span><span class="file-nr">Geral</span></li>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Relatório mensal de atividades</span><span class="file-nr">Geral</span></li>
+                  <li class="file-row"><span class="ext ext-docx">docx</span><span class="file-name">Registro de incidentes e quase acidentes</span><span class="file-nr">Geral</span></li>
+                  <li class="file-row"><span class="ext ext-xlsx">xlsx</span><span class="file-name">Cronograma anual de ações</span><span class="file-nr">Geral</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         COMPARATIVO TÉCNICO
+    ============================================================= -->
+    <section id="diferenciais" class="section bg-ice border-y border-line">
+      <div class="wrap">
+        <h2 class="section-title max-w-3xl">A diferença entre um arquivo baixado e um padrão técnico</h2>
+        <p class="section-lead">Modelo solto resolve uma demanda. Um acervo padronizado sustenta a sua rotina inteira e a imagem que você entrega ao cliente.</p>
+
+        <div class="mt-12 lg:mt-16 overflow-x-auto -mx-5 px-5 sm:mx-0 sm:px-0">
+          <table class="cmp">
+            <caption class="sr-only">Comparativo entre modelos genéricos da internet e o padrão técnico CAGB Safety Work</caption>
+            <thead>
+              <tr>
+                <th scope="col"><span class="sr-only">Critério</span></th>
+                <th scope="col">Modelos Genéricos da Internet</th>
+                <th scope="col" class="cmp-brand">Padrão Técnico CAGB Safety Work</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Referência normativa</th>
+                <td class="cmp-no"><span><i data-lucide="x" aria-hidden="true"></i>Sem data nem indicação da versão da NR</span></td>
+                <td class="cmp-yes"><span><i data-lucide="check" aria-hidden="true"></i>Estruturado sobre o texto vigente das NRs</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Atualização</th>
+                <td class="cmp-no"><span><i data-lucide="x" aria-hidden="true"></i>Arquivo parado no tempo, sem revisão</span></td>
+                <td class="cmp-yes"><span><i data-lucide="check" aria-hidden="true"></i>Documentos sempre atualizados a cada mudança das NRs</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Edição</th>
+                <td class="cmp-no"><span><i data-lucide="x" aria-hidden="true"></i>PDF travado ou com marca d&#x27;água</span></td>
+                <td class="cmp-yes"><span><i data-lucide="check" aria-hidden="true"></i>Arquivos abertos em Word, Excel e PowerPoint</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Padronização</th>
+                <td class="cmp-no"><span><i data-lucide="x" aria-hidden="true"></i>Cada arquivo com um layout diferente</span></td>
+                <td class="cmp-yes"><span><i data-lucide="check" aria-hidden="true"></i>Identidade única, pronta para receber a sua logo</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Organização</th>
+                <td class="cmp-no"><span><i data-lucide="x" aria-hidden="true"></i>Arquivos avulsos, sem lógica de pastas</span></td>
+                <td class="cmp-yes"><span><i data-lucide="check" aria-hidden="true"></i>Cinco módulos numerados e nomenclatura padronizada</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Origem do conteúdo</th>
+                <td class="cmp-no"><span><i data-lucide="x" aria-hidden="true"></i>Autoria desconhecida</span></td>
+                <td class="cmp-yes"><span><i data-lucide="check" aria-hidden="true"></i>Elaborado por TST com atuação desde 2007</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Compra e suporte</th>
+                <td class="cmp-no"><span><i data-lucide="x" aria-hidden="true"></i>Sem garantia e sem canal de atendimento</span></td>
+                <td class="cmp-yes"><span><i data-lucide="check" aria-hidden="true"></i>Garantia legal de 7 dias e atendimento imediato</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SOBRE O FUNDADOR
+    ============================================================= -->
+    <section id="fundador" class="section">
+      <div class="wrap grid lg:grid-cols-2 gap-10 lg:gap-20 items-start">
+        <div>
+          <p class="font-display font-semibold text-tech">Sobre o fundador</p>
+          <h2 class="section-title mt-3">De especialista para especialista</h2>
+          <p class="mt-8 text-xl sm:text-2xl leading-snug text-navy font-display font-medium max-w-xl">
+            Cada modelo do acervo passou pelo mesmo teste: precisou funcionar na prática antes de virar padrão.
+          </p>
+        </div>
+
+        <div>
+          <p class="text-lg text-slate-600 max-w-xl">
+            A CAGB Safety Work nasceu de quase duas décadas de vivência real em chão de fábrica, auditorias, gestão de riscos e conformidade legal. O objetivo é dar ao TST um ponto de partida tecnicamente sólido, para que o tempo dele seja gasto analisando o risco e não formatando documento.
+          </p>
+
+          <dl class="cv max-w-xl">
+            <div>
+              <dt>2007</dt>
+              <dd><b>Técnico em Segurança do Trabalho</b><span>Formado em 2007, com atuação contínua em indústria, auditorias e gestão de riscos ocupacionais.</span></dd>
+            </div>
+            <div>
+              <dt>FMU</dt>
+              <dd><b>Engenharia Ambiental e Sanitária</b><span>Graduando pelo Centro Universitário das Faculdades Metropolitanas Unidas, unindo a prática de SST à visão de Engenharia e Meio Ambiente.</span></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         COMO FUNCIONA
+    ============================================================= -->
+    <section class="section bg-ice border-y border-line" aria-labelledby="como-funciona">
+      <div class="wrap">
+        <h2 id="como-funciona" class="section-title max-w-3xl">Do primeiro contato ao acervo na sua máquina</h2>
+        <ol class="steps mt-12 lg:mt-16">
+          <li>
+            <h3>Fale com o Consultor Virtual</h3>
+            <p>O atendimento é automatizado, pelo WhatsApp, e começa na hora em que você chama.</p>
+          </li>
+          <li>
+            <h3>Confirme a compra</h3>
+            <p>Você recebe o valor e as formas de pagamento e tira as dúvidas antes de decidir.</p>
+          </li>
+          <li>
+            <h3>Baixe e comece a editar</h3>
+            <p>Com o pagamento confirmado, o link do acervo completo chega na mesma conversa.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         OFERTA / ATENDIMENTO AUTOMATIZADO
+    ============================================================= -->
+    <section id="oferta" class="section offer">
+      <div class="wrap">
+        <h2 class="section-title max-w-3xl !text-white">O acervo completo, em um único acesso</h2>
+
+        <div class="offer-card mt-12">
+          <!-- O que está incluso -->
+          <div class="p-7 sm:p-11">
+            <h3 class="text-xl font-bold">Tudo o que está incluso</h3>
+            <ul class="incl mt-4">
+              <li><i data-lucide="check" aria-hidden="true"></i><span><b>Módulo 01:</b> Documentação Base (PGR, GRO, Ordens de Serviço)</span></li>
+              <li><i data-lucide="check" aria-hidden="true"></i><span><b>Módulo 02:</b> Treinamentos em PPT editáveis por NR</span></li>
+              <li><i data-lucide="check" aria-hidden="true"></i><span><b>Módulo 03:</b> Checklists técnicos de inspeção e auditoria</span></li>
+              <li><i data-lucide="check" aria-hidden="true"></i><span><b>Módulo 04:</b> Planilhas automatizadas de EPIs e ASOs</span></li>
+              <li><i data-lucide="check" aria-hidden="true"></i><span><b>Módulo 05:</b> Biblioteca de DDS e modelos de relatório</span></li>
+              <li><i data-lucide="check" aria-hidden="true"></i><span>Arquivos abertos, sem senha e sem marca d'água</span></li>
+              <li><i data-lucide="refresh-cw" aria-hidden="true"></i><span><b>Atualização contínua:</b> documentos revisados sempre que as NRs mudam</span></li>
+            </ul>
+          </div>
+
+          <!-- Fechamento pelo robô -->
+          <div class="bg-ice border-t lg:border-t-0 lg:border-l border-line p-7 sm:p-11 flex flex-col justify-center">
+            <span class="inline-flex self-start items-center gap-2 text-sm font-semibold text-tech">
+              <span class="relative flex w-2.5 h-2.5"><span class="absolute inset-0 rounded-full bg-tech opacity-30 animate-ping"></span><span class="relative w-2.5 h-2.5 rounded-full bg-tech"></span></span>
+              Atendimento imediato
+            </span>
+            <h3 class="mt-4 text-2xl font-bold">Fale com o Consultor Virtual</h3>
+            <p class="mt-3 text-slate-600">
+              O atendimento é automatizado e começa na hora. O consultor virtual informa o valor e as formas de pagamento, tira dúvidas e libera o acesso assim que a compra é confirmada.
+            </p>
+            <!-- INSERIR VALOR DO ACERVO AQUI (opcional), por exemplo:
+                 <p class="mt-6 font-display font-extrabold text-4xl text-navy">R$ 000,00</p> -->
+
+            <!-- INSERIR LINK DO ROBÔ DE VENDAS AQUI -->
+            <a href="#" data-robo class="btn btn-action mt-7 px-6 py-4 text-lg">
+              Iniciar Atendimento
+              <i data-lucide="arrow-right" class="w-5 h-5" aria-hidden="true"></i>
+            </a>
+
+            <div class="mt-7 pt-6 border-t border-line flex gap-3 text-sm">
+              <i data-lucide="shield-check" class="w-5 h-5 text-navy shrink-0 mt-0.5" aria-hidden="true"></i>
+              <p><b class="text-navy block font-semibold">Garantia legal de 7 dias</b><span class="text-slate-500">Direito de arrependimento conforme o Código de Defesa do Consumidor.</span></p>
+            </div>
+            <p class="mt-4 flex gap-3 text-xs text-slate-500">
+              <i data-lucide="lock" class="w-4 h-4 shrink-0 ml-0.5" aria-hidden="true"></i>
+              Seus dados são usados apenas para o atendimento e a liberação do acesso.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FAQ (ACORDEÃO)
+    ============================================================= -->
+    <section id="faq" class="section">
+      <div class="wrap grid lg:grid-cols-[22rem_1fr] gap-10 lg:gap-20 items-start">
+        <div class="lg:sticky lg:top-28">
+          <h2 class="section-title">Perguntas técnicas antes de solicitar o acesso</h2>
+          <p class="mt-5 text-slate-500">Não encontrou a sua? O Consultor Virtual responde na hora.</p>
+          <!-- INSERIR LINK DO ROBÔ DE VENDAS AQUI -->
+          <a href="#oferta" data-robo class="btn btn-ghost mt-6 px-5 py-3 text-sm">
+            <i data-lucide="message-square-text" class="w-4 h-4" aria-hidden="true"></i>
+            Fazer uma pergunta
+          </a>
+        </div>
+
+        <div class="border-t border-navy">
+          <div class="faq-item" data-open="false">
+            <h3>
+              <button type="button" class="faq-btn" aria-expanded="false" aria-controls="faq-1">
+                <span>Posso inserir a minha logo e os dados da empresa que atendo?</span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div id="faq-1" class="faq-panel" role="region"><div><p>Sim. Todos os arquivos são abertos, sem senha e sem marca d&#x27;água. Você troca cabeçalho, logo, cores e textos livremente e entrega o documento com a sua identidade ou a do seu cliente.</p></div></div>
+          </div>
+          <div class="faq-item" data-open="false">
+            <h3>
+              <button type="button" class="faq-btn" aria-expanded="false" aria-controls="faq-2">
+                <span>Os arquivos são compatíveis com qual versão do Office?</span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div id="faq-2" class="faq-panel" role="region"><div><p>Os arquivos estão nos formatos .docx, .xlsx e .pptx, que abrem no Microsoft Office 2013 ou superior e no Microsoft 365. Também abrem no Google Workspace e no LibreOffice, mas as planilhas com fórmulas e formatação condicional funcionam melhor no Excel.</p></div></div>
+          </div>
+          <div class="faq-item" data-open="false">
+            <h3>
+              <button type="button" class="faq-btn" aria-expanded="false" aria-controls="faq-3">
+                <span>Os modelos já saem prontos para assinar e entregar?</span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div id="faq-3" class="faq-panel" role="region"><div><p>Não, e nenhum modelo sério deveria. O acervo entrega a estrutura técnica e a referência normativa. O levantamento de riscos, os dados da empresa e a responsabilidade técnica pelo documento final são do profissional que o elabora e assina.</p></div></div>
+          </div>
+          <div class="faq-item" data-open="false">
+            <h3>
+              <button type="button" class="faq-btn" aria-expanded="false" aria-controls="faq-4">
+                <span>O que acontece quando uma NR é alterada?</span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <!-- AJUSTAR se quiser detalhar como o cliente recebe as atualizações (link, e-mail, área de membros) e se há custo -->
+            <div id="faq-4" class="faq-panel" role="region"><div><p>O acervo é atualizado continuamente. Sempre que uma Norma Regulamentadora é alterada, os documentos, treinamentos e checklists relacionados são revisados para refletir o texto vigente, e você passa a contar com a versão mais recente.</p></div></div>
+          </div>
+          <div class="faq-item" data-open="false">
+            <h3>
+              <button type="button" class="faq-btn" aria-expanded="false" aria-controls="faq-5">
+                <span>Como e quando recebo o acesso?</span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div id="faq-5" class="faq-panel" role="region"><div><p>O acesso é digital. Assim que o pagamento é confirmado, o Consultor Virtual envia o link para download do acervo completo, organizado nas cinco pastas de módulos.</p></div></div>
+          </div>
+          <div class="faq-item" data-open="false">
+            <h3>
+              <button type="button" class="faq-btn" aria-expanded="false" aria-controls="faq-6">
+                <span>Como funciona a garantia de 7 dias?</span>
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div id="faq-6" class="faq-panel" role="region"><div><p>Por se tratar de compra realizada pela internet, você tem 7 dias corridos a partir do recebimento para solicitar o cancelamento e o reembolso integral, conforme o art. 49 do Código de Defesa do Consumidor. Basta pedir pelo mesmo canal de atendimento.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       RODAPÉ INSTITUCIONAL
+  ============================================================= -->
+  <footer class="bg-navy-900 text-slate-400 text-sm">
+    <div class="wrap py-16 grid md:grid-cols-[1.4fr_1fr_1fr] gap-12">
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="grid place-items-center w-11 h-11 rounded-xl bg-white shrink-0"><svg class="w-8 h-8" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 6 11.9 28v44L50 94Z" fill="#0F2942" stroke="#0F2942" stroke-width="6" stroke-linejoin="round"/><path d="M50 6 88.1 28v44L50 94Z" fill="#1E6B52" stroke="#1E6B52" stroke-width="6" stroke-linejoin="round"/><path d="M30 51 44 65 71 36" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="leading-none">
+            <span class="block font-display font-extrabold tracking-wide text-white text-base">CAGB SAFETY WORK</span>
+            <span class="block text-[11px] text-slate-400 mt-1.5">Segurança Ocupacional</span>
+          </span>
+        </div>
+        <p class="mt-5 max-w-xs">Acervos técnicos editáveis para profissionais de Segurança do Trabalho.</p>
+      </div>
+
+      <div>
+        <p class="font-display font-bold text-white">Atendimento</p>
+        <ul class="mt-4 space-y-2.5">
+          <li>Automatizado, com resposta imediata</li>
+          <li>
+            <!-- O link abaixo usa o número definido em WHATSAPP_NUMERO, no final do arquivo -->
+            <a href="#oferta" data-robo class="inline-flex items-center gap-2 text-white font-semibold hover:underline underline-offset-4">
+              <i data-lucide="message-circle" class="w-4 h-4" aria-hidden="true"></i>
+              Falar pelo WhatsApp
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-display font-bold text-white">Navegação</p>
+        <ul class="mt-4 space-y-2.5">
+          <li><a href="#acervo" class="hover:text-white">O Acervo</a></li>
+          <li><a href="#diferenciais" class="hover:text-white">Diferenciais</a></li>
+          <li><a href="#fundador" class="hover:text-white">Sobre o Fundador</a></li>
+          <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10">
+      <div class="wrap py-7 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-xs">
+        <p>&copy; <span id="ano">2026</span> CAGB Safety Work. Todos os direitos reservados.</p>
+        <div class="flex gap-6">
+          <!-- INSERIR LINKS DAS PÁGINAS DE TERMOS E PRIVACIDADE AQUI -->
+          <a href="#" class="hover:text-white">Termos de Uso</a>
+          <a href="#" class="hover:text-white">Política de Privacidade</a>
+        </div>
+      </div>
+      <p class="wrap pb-8 text-[11px] text-slate-500 max-w-none">
+        Os materiais são modelos técnicos de apoio. A adequação à realidade de cada empresa e a responsabilidade técnica pelos documentos emitidos cabem ao profissional habilitado que os utiliza.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       BOTÃO FLUTUANTE DE ATENDIMENTO
+       Se o widget do robô já exibir um botão próprio, remova este bloco.
+  ============================================================= -->
+  <!-- INSERIR LINK DO ROBÔ DE VENDAS AQUI -->
+  <a href="#oferta" data-robo aria-label="Falar com o Consultor Virtual" class="fab">
+    <i data-lucide="headset" class="w-6 h-6" aria-hidden="true"></i>
+    <span>Consultor Virtual</span>
+  </a>
+
+  <!-- ============================================================
+       SCRIPTS
+  ============================================================= -->
+  <script>
+    /* ------------------------------------------------------------------
+       CONFIGURAÇÃO DO ROBÔ DE VENDAS (WHATSAPP)
+       <!-- INSERIR LINK DO ROBÔ DE VENDAS AQUI -->
+       Preencha apenas o número do WhatsApp do robô, só com dígitos:
+       55 + DDD + número. Exemplo: '5511999999999'
+       O link é montado sozinho e aplicado a todos os botões marcados
+       com o atributo data-robo, abrindo a conversa direto no robô.
+    ------------------------------------------------------------------- */
+    const WHATSAPP_NUMERO = '5511970563178';
+    const WHATSAPP_MENSAGEM = 'Olá! Quero saber mais sobre o Acervo Técnico CAGB Safety Work.';
+    const ROBO_URL = WHATSAPP_NUMERO
+      ? 'https://wa.me/' + WHATSAPP_NUMERO.replace(/\D/g, '') + '?text=' + encodeURIComponent(WHATSAPP_MENSAGEM)
+      : '';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Ícones
+      if (window.lucide) lucide.createIcons();
+
+      // Link do robô em todos os CTAs
+      if (ROBO_URL) {
+        document.querySelectorAll('[data-robo]').forEach(el => {
+          el.href = ROBO_URL;
+          el.target = '_blank';
+          el.rel = 'noopener';
+        });
+      }
+
+      // Ano do rodapé
+      document.getElementById('ano').textContent = new Date().getFullYear();
+
+      // ---------- Menu mobile ----------
+      const menuBtn = document.getElementById('menu-btn');
+      const menu = document.getElementById('menu-mobile');
+      const setMenu = (open) => {
+        menu.classList.toggle('hidden', !open);
+        menuBtn.setAttribute('aria-expanded', String(open));
+        menuBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+        menuBtn.querySelector('[data-icon-open]').classList.toggle('hidden', open);
+        menuBtn.querySelector('[data-icon-close]').classList.toggle('hidden', !open);
+      };
+      menuBtn.addEventListener('click', () => setMenu(menu.classList.contains('hidden')));
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+      // ---------- Abas do catálogo ----------
+      const tabs = Array.from(document.querySelectorAll('.tab-btn'));
+      const selectTab = (tab, focus) => {
+        tabs.forEach(t => {
+          const active = t === tab;
+          t.setAttribute('aria-selected', String(active));
+          t.tabIndex = active ? 0 : -1;
+          document.getElementById(t.getAttribute('aria-controls')).hidden = !active;
+        });
+        if (focus) tab.focus();
+      };
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => selectTab(tab));
+        tab.addEventListener('keydown', e => {
+          const map = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
+          if (e.key in map) { e.preventDefault(); selectTab(tabs[(i + map[e.key] + tabs.length) % tabs.length], true); }
+          if (e.key === 'Home') { e.preventDefault(); selectTab(tabs[0], true); }
+          if (e.key === 'End')  { e.preventDefault(); selectTab(tabs[tabs.length - 1], true); }
+        });
+      });
+
+      // ---------- Acordeão do FAQ ----------
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const btn = item.querySelector('.faq-btn');
+        btn.addEventListener('click', () => {
+          const open = item.dataset.open !== 'true';
+          item.dataset.open = String(open);
+          btn.setAttribute('aria-expanded', String(open));
+        });
+      });
+    });
+  </script>
+
+  <!-- INSERIR SCRIPT DO WIDGET DO ROBÔ AQUI -->
+
+</body>
+</html>
